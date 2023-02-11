@@ -1,7 +1,7 @@
 require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
-const { signInToken } = require('../config/auth');
+// const { signInToken } = require('../config/auth');
 
 const registerUser = async (req, res) => {
     try {
@@ -18,9 +18,9 @@ const registerUser = async (req, res) => {
                 password: bcrypt.hashSync(req.body.password),
             });
             const user = await newUser.save();
-            const token = signInToken(user);
+    
             res.send({
-                token,
+    
                 _id: user._id,
                 name: user.name,
                 email: user.email,
@@ -43,9 +43,9 @@ const loginUser = async (req, res) => {
             user.password &&
             bcrypt.compareSync(req.body.password, user.password)
         ) {
-            const token = signInToken(user);
+            
             res.send({
-                token,
+                
                 _id: user.id,
                 name: user.name,
                 email: user.email,
@@ -91,9 +91,9 @@ const updateUser = async (req, res) => {
             user.email = req.body.email;
             user.avatar = req.body.avatar;
             const updatedUser = await user.save();
-            const token = signInToken(updatedUser);
+            
             res.send({
-                token,
+                
                 _id: updatedUser._id,
                 name: updatedUser.name,
                 email: updatedUser.email,
