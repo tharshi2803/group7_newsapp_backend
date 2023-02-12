@@ -3,6 +3,8 @@ const connectDataBase = require('./config/db');
 
 const User = require('./models/User');
 const userData = require('./utils/user');
+const Category = require('./models/Category');
+const categoryData = require('./utils/category');
 const News = require('./models/News');
 const newsData = require('./utils/news');
 
@@ -13,6 +15,9 @@ const importData = async () => {
 
         await User.deleteMany();
         await User.insertMany(userData);
+
+        await Category.deleteMany();
+        await Category.insertMany(categoryData);
 
         await News.deleteMany();
         await News.insertMany(newsData);
