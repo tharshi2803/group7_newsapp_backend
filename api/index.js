@@ -4,9 +4,9 @@ const cors = require('cors');
 
 const connectDataBase = require('../config/db');
 const userRoutes = require('../routes/userRoutes');
+const categoryRoutes = require('../routes/categoryRoutes');
 const newsRoutes = require('../routes/newsRoutes');
 const formData = require('express-form-data');
-const { isAuth } = require('../config/auth');
 
 connectDataBase();
 const app = express();
@@ -21,7 +21,8 @@ app.get('/', (req, res) => {
 });
 
 //routes
-app.use('/api/user', isAuth, userRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/category', categoryRoutes);
 app.use('/api/news', newsRoutes);
 
 // Use express's default error handling middleware
